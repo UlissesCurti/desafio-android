@@ -1,12 +1,12 @@
-package com.picpay.desafio.android.core.network
+package com.picpay.desafio.android.core
 
 import com.google.gson.GsonBuilder
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.log
 
 class NetworkMiddleware {
 
@@ -24,7 +24,7 @@ class NetworkMiddleware {
             return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(httpClient.build())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         }
