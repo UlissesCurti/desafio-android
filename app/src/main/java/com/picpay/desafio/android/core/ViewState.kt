@@ -3,6 +3,10 @@ package com.picpay.desafio.android.core
 data class ViewState<out T>(val status: Status, val data: T? = null) {
 
     companion object {
+        fun <T> cache(data: T?): ViewState<T> {
+            return ViewState(Status.CACHE, data)
+        }
+
         fun <T> success(data: T?): ViewState<T> {
             return ViewState(Status.SUCCESS, data)
         }
@@ -17,6 +21,7 @@ data class ViewState<out T>(val status: Status, val data: T? = null) {
     }
 
     enum class Status {
+        CACHE,
         SUCCESS,
         LOADING,
         ERROR

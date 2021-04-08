@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface UserService {
 
     @GET("users")
-    fun getUsers(): Single<List<User>>
+    fun requestUsers(): Single<List<User>>
 }
