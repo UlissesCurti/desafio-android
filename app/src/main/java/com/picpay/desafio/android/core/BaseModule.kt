@@ -5,7 +5,7 @@ import org.koin.dsl.module
 object BaseModule {
     val instance = module {
 
-        single { NetworkMiddleware.getInstance() }
+        single { HttpClient.getInstance() }
 
         factory<Configuration>{
             ConfigurationImpl(get())

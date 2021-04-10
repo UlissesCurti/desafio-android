@@ -1,6 +1,7 @@
 package com.picpay.desafio.android.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * TODO:
      * If the diff after rotating screen and reloading the data is different, do not auto scroll.
-     * If the diff is equals, them auto scroll
+     * If the diff is equals, then auto scroll
      **/
 
     private fun observeViewModel() {
@@ -78,12 +79,15 @@ class MainActivity : AppCompatActivity() {
             viewModel.usersLiveData.observe(this@MainActivity, {
                 when (it.status) {
                     ViewState.Status.LOADING -> {
+                        Log.i("usersLiveData", "LOADING")
                         progressBar.show()
                     }
                     ViewState.Status.CACHE -> {
+                        Log.i("usersLiveData", "CACHE")
                         loadUsersIntoAdapter(it.data)
                     }
                     ViewState.Status.SUCCESS -> {
+                        Log.i("usersLiveData", "SUCCESS")
                         progressBar.hide()
                         loadUsersIntoAdapter(it.data)
 
@@ -104,6 +108,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.post {
                 binding.nestedScroll.scrollTo(0, viewModel.scrollPosition)
             }
+
         }
     }
 

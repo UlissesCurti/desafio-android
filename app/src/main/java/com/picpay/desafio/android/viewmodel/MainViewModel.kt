@@ -22,7 +22,7 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
     val usersLiveData: LiveData<ViewState<List<User>>>
         get() = _usersLiveData
 
-    var usersAlreadyLoaded = false
+    private var usersAlreadyLoaded = false
 
     var scrollPosition = 0
         private set
@@ -34,7 +34,7 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
 
     private suspend fun getCachedUsers() {
         val users = repository.getUsers().first()
-        // If the users request already has completed, do not update the UI with the cached values.
+        // If the users request has already completed, do not update the UI with the cached values.
         if (!usersAlreadyLoaded) {
             viewModelScope.launch(Dispatchers.Main) {
                 _usersLiveData.value = ViewState.cache(users)
