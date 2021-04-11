@@ -7,7 +7,7 @@ object BaseModule {
 
         single { HttpClient.getInstance() }
 
-        factory<Configuration>{
+        factory<Configuration> {
             ConfigurationImpl(get())
         }
     }

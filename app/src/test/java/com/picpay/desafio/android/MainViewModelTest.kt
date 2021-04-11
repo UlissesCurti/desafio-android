@@ -22,11 +22,13 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
+// When the tests are running all together, sometimes there are random failures. If there are
+// running one by one, everything works perfectly.
 class MainViewModelTest {
 
     @get:Rule
@@ -59,7 +61,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test loadUsers on success`() = runBlocking {
+    fun `test loadUsers on success`() {
         // cache mock
         every { repository.getUsers() } returns mockCacheUsers()
         // request mock
@@ -92,7 +94,7 @@ class MainViewModelTest {
                 ViewState(status = ViewState.Status.LOADING),
                 ViewState(
                     status = ViewState.Status.CACHE,
-                    data = mockCacheUsers().toList().first()
+                    data = runBlocking { mockCacheUsers().toList().first() }
                 ),
                 ViewState(
                     status = ViewState.Status.SUCCESS,
@@ -103,7 +105,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test loadUsers on error`() = runBlocking {
+    fun `test loadUsers on error`() {
         // cache mock
         every { repository.getUsers() } returns mockCacheUsers()
         // request mock
@@ -140,9 +142,11 @@ class MainViewModelTest {
                 ViewState(status = ViewState.Status.LOADING),
                 ViewState(
                     status = ViewState.Status.CACHE,
-                    data = mockCacheUsers().toList().first()
+                    data = runBlocking { mockCacheUsers().toList().first() }
                 ),
-                ViewState(status = ViewState.Status.ERROR)
+                ViewState(
+                    status = ViewState.Status.ERROR
+                )
             )
         )
     }

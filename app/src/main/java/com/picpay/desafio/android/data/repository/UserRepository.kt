@@ -1,7 +1,6 @@
 package com.picpay.desafio.android.data.repository
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.picpay.desafio.android.core.Configuration
 import com.picpay.desafio.android.data.local.UsersDao
 import com.picpay.desafio.android.data.model.User
