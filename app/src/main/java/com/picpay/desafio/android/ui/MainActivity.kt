@@ -67,12 +67,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * TODO:
-     * If the diff after rotating screen and reloading the data is different, do not auto scroll.
-     * If the diff is equals, then auto scroll
-     **/
-
     private fun observeViewModel() {
         with(binding) {
 

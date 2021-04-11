@@ -25,15 +25,4 @@ object RecyclerViewMatchers {
             return itemMatcher.matches(viewHolder.itemView)
         }
     }
-
-    fun checkRecyclerViewItem(resId: Int, position: Int, withMatcher: Matcher<View>) {
-        Espresso.onView(ViewMatchers.withId(resId)).check(
-            ViewAssertions.matches(
-                atPosition(
-                    position,
-                    ViewMatchers.hasDescendant(withMatcher)
-                )
-            )
-        )
-    }
 }
